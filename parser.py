@@ -76,6 +76,19 @@ def parse(in_file):
                 references.append(Reference(tag, entity, refex, number, reftype))
 
             try:
+                references = []
+                references_xml = lex.find('references')
+                for reference in references_xml:
+                    tag = reference.attrib['tag']
+                    entity = reference.attrib['entity']
+                    refex = reference.text
+                    number = reference.attrib['number']
+                    reftype = reference.attrib['type']
+                    references.append(Reference(tag, entity, refex, number, reftype))
+            except:
+                references = []
+
+            try:
                 text = lex.find('text').text
                 if not text:
                     print('error text')
